@@ -1,0 +1,39 @@
+{
+  "name": "alexa-stats",
+  "version": "0.0.1",
+  "description": "Scrapes [Alexa](http://www.alexa.com/) site to get traffic statistics and analytics for domain.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/miguelmota/alexa-stats"
+  },
+  "keywords": [
+    "alexa",
+    "rank",
+    "analytics",
+    "statistics",
+    "scrape",
+    "traffic",
+    "website"
+  ],
+  "author": {
+    "name": "Miguel Mota",
+    "email": "hello@miguelmota.com",
+    "url": "https://miguelmota.com/"
+  },
+  "homepage": "https://github.com/miguelmota/alexa-stats",
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/miguelmota/alexa-stats/blob/master/LICENSE.md"
+  },
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "tape": "^4.6.3"
+  }
+}
