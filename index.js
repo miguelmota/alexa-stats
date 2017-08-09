@@ -8,7 +8,7 @@ function alexaStats (domain) {
       url: `http://www.alexa.com/siteinfo/${domain}`,
       headers: {
         Host: 'www.alexa.com',
-        Referer: `https://www.similarweb.com/website/${domain}`,
+        Referer: `http://www.alexa.com/siteinfo/${domain}`,
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36',
         'Cache-Control': 'no-cache',
         Connection: 'keep-alive',
