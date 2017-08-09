@@ -1,6 +1,6 @@
 {
   "name": "alexa-stats",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Scrapes [Alexa](http://www.alexa.com/) site to get traffic statistics and analytics for domain.",
   "main": "index.js",
   "scripts": {

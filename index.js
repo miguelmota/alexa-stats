@@ -49,23 +49,11 @@ function alexaStats (domain) {
 
       const $ = cheerio.load(body)
 
-      //$('#muv_table thead tr th').each((i, x) => {
-        //const header = $(x).text().trim().replace(/\n.*/gi, '')
-        /*
-        if (/country/gi.test(header)) {
-          const country = $('#muv_table tbody tr').eq(i).find('.metrics-data .text-inline').text()
-          const flag = $('#muv_table tbody tr').eq(i).find('.metrics-data .img-inline').attr('src')
-          data.country = country
-          data.countryFlag = flag
-        }
-      })
-      */
-
       data.globalRank = $('[data-cat="globalRank"] .metrics-data').text().trim()
       data.globalRankChange = $('[data-cat="globalRank"] .change-wrapper').text().trim()
       data.country = $('[data-cat="countryRank"] .metrics-title a').text().trim()
       data.countryRank = $('[data-cat="countryRank"] .metrics-data').text().trim()
-      data.countryFlag = $('[data-cat="countryRank"] .img-inline').attr('src').trim()
+      data.countryFlag = ($('[data-cat="countryRank"] .img-inline').attr('src')||'').trim()
       data.bounceRate = $('[data-cat="bounce_percent"] .metrics-data').text().trim()
       data.bounceRateChange = $('[data-cat="bounce_percent"] .change-wrapper').text().trim()
       data.dailyPageViewsPerVisitor = $('[data-cat="pageviews_per_visitor"] .metrics-data').text().trim()
