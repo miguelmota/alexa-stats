@@ -1,6 +1,6 @@
 # alexa-stats
 
-> Scrapes [Alexa](http://www.alexa.com/) site to get traffic statistics and analytics for domain
+> Scrapes [Alexa](http://www.alexa.com/) site to get traffic statistics and analytics for domain.
 
 ## Install
 
