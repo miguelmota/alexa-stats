@@ -40,7 +40,9 @@ function alexaStats (domain) {
         loadSpeed: '',
         categories: [],
         upstreamSites: [],
-        downstreamSites: []
+        downstreamSites: [],
+        relatedSites: [],
+        subdomains: []
       }
 
       if (!body) {
@@ -81,6 +83,18 @@ function alexaStats (domain) {
         const percentage = $(x).find('.text-right').text().trim()
 
         data.downstreamSites.push(`${domain} ${percentage}`)
+      })
+
+      $('#audience_overlap_table tbody tr').each((i, x) => {
+        const domain = $(x).find('a').text().trim();
+        data.relatedSites.push(domain);
+      })
+
+      $('#subdomain_table tbody tr').each((i, x) => {
+        const domain = $(x).find('span.word-wrap').text().trim()
+        const percentage = $(x).find('.text-right').text().trim()
+
+        data.subdomains.push(`${domain} ${percentage}`)
       })
 
       resolve(data)
