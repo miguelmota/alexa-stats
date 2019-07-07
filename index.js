@@ -2,6 +2,11 @@ const request = require('request')
 const cheerio = require('cheerio')
 const fs = require('fs')
 
+function match (str, regex) {
+  var m = str.match(regex)
+  return m && m.length > 0 ? m[0] : null
+}
+
 function alexaStats (domain) {
   return new Promise((resolve, reject) => {
     request({
@@ -51,21 +56,21 @@ function alexaStats (domain) {
 
       const $ = cheerio.load(body)
 
-      data.globalRank = $('[data-cat="globalRank"] .metrics-data').text().trim()
-      data.globalRankChange = $('[data-cat="globalRank"] .change-wrapper').text().trim()
-      data.country = $('[data-cat="countryRank"] .metrics-title a').text().trim()
-      data.countryRank = $('[data-cat="countryRank"] .metrics-data').text().trim()
-      data.countryFlag = ($('[data-cat="countryRank"] .img-inline').attr('src')||'').trim()
-      data.bounceRate = $('[data-cat="bounce_percent"] .metrics-data').text().trim()
-      data.bounceRateChange = $('[data-cat="bounce_percent"] .change-wrapper').text().trim()
-      data.dailyPageViewsPerVisitor = $('[data-cat="pageviews_per_visitor"] .metrics-data').text().trim()
-      data.dailyPageViewsPerVisitorChange = $('[data-cat="pageviews_per_visitor"] .change-wrapper').text().trim()
-      data.dailyTimeOnSite = $('[data-cat="time_on_site"] .metrics-data').text().trim()
-      data.dailyTimeOnSiteChange = $('[data-cat="time_on_site"] .change-wrapper').text().trim()
-      data.searchVisits = $('[data-cat="search_percent"] .metrics-data').text().trim()
-      data.searchVisitsChange = $('[data-cat="search_percent"] .change-wrapper').text().trim()
-      data.totalSitesLinkingIn = $('#linksin-panel-content .box1-r').text().trim()
-      data.loadSpeed = $('#loadspeed-panel-content').text().trim().replace(/.*\(/gi, '').replace(/\).*/gi, '')
+      data.globalRank = match($('.rank-global .data').text(), /\d+/)
+      data.globalRankChange = match($('.rank-global .start-rank .rank').text(), /\d+/)
+      data.country = match($('.countryrank .Selector').text(), /\d+/)
+      data.countryRank = $('.countryrank .CountryRank .num').text().trim()
+      data.countryFlag = null // todo
+      data.bounceRate = $(".engagement .sectional:has(.title:contains('Bounce')) .data").text().trim()
+      data.bounceRateChange = match($(".engagement .sectional:has(.title:contains('Bounce')) .data .delta").text(), /\d+/)
+      data.dailyPageViewsPerVisitor = null // only when logged in
+      data.dailyPageViewsPerVisitorChange = null // only when logged in
+      data.dailyTimeOnSite = match($(".engagement .sectional:has(.title:contains('Daily Time')) .data").text().trim(), /[\d:]+/)
+      data.dailyTimeOnSiteChange = match($(".engagement .sectional:has(.title:contains('Daily Time')) .data .delta").text(), /\d+/)
+      data.searchVisits = null // gone?
+      data.searchVisitsChange = null // gone?
+      data.totalSitesLinkingIn = null // only when logged in
+      data.loadSpeed = null // gone?
 
       $('#category_link_table tbody tr').each((i, x) => {
         data.categories.push($(x).text().trim().replace('&gt;', '>'))
